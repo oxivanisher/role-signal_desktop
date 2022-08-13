@@ -1,7 +1,7 @@
 ---
 
 galaxy_info:
-  role_name: signal-desktop
+  role_name: signal_desktop
   author: Marc Urben
   description: Please fill me out at some point in time
   company: Thunderbluff
