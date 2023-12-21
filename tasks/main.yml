@@ -15,6 +15,7 @@
     name: signal-desktop
     types: [deb]
     uris: "https://updates.signal.org/desktop/apt"
+    architectures: [amd64]
     components: [main]
     suites: [xenial]
     signed_by: https://updates.signal.org/desktop/apt/keys.asc
