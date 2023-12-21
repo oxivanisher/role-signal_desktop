@@ -1,15 +1,25 @@
 ---
 
-- name: Add the Signal Packages APT key
-  ansible.builtin.apt_key:
-    url: https://updates.signal.org/desktop/apt/keys.asc
-    state: present
+# - name: Add the Signal Packages APT key
+#   ansible.builtin.apt_key:
+#     url: https://updates.signal.org/desktop/apt/keys.asc
+#     state: present
 
-- name: Add Signal Repository
-  ansible.builtin.apt_repository:
-    repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+# - name: Add Signal Repository
+#   ansible.builtin.apt_repository:
+#     repo: "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"
+#     state: present
+#     filename: signal-desktop
+
+- name: Add Signal repo using key from URL
+  ansible.builtin.deb822_repository:
+    name: signal-desktop
+    types: [deb]
+    uris: "ttps://updates.signal.org/desktop/apt"
+    components: [xenial, main]
+    signed_by: https://updates.signal.org/desktop/apt/keys.asc
     state: present
-    filename: signal-desktop
+    enabled: true
 
 - name: Install Signal Desktop
   ansible.builtin.apt:
