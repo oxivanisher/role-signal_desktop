@@ -1,9 +1,4 @@
 ---
-- name: Remove legacy apt file
-  ansible.builtin.file:
-    path: /etc/apt/sources.list.d/signal-desktop.list
-    state: absent
-
 - name: Add Signal repo using key from URL
   ansible.builtin.deb822_repository:
     name: signal-desktop
