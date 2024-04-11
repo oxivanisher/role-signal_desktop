@@ -10,9 +10,13 @@
     signed_by: https://updates.signal.org/desktop/apt/keys.asc
     state: present
     enabled: true
+  become: true
+  become_user: root
 
 - name: Install Signal Desktop
   ansible.builtin.apt:
     name: signal-desktop
     update_cache: true
     state: present
+  become: true
+  become_user: root
