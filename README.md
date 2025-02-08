@@ -1,5 +1,6 @@
 signal_desktop
 ==============
+[![Ansible Lint](https://github.com/oxivanisher/role-signal_desktop/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/oxivanisher/role-signal_desktop/actions/workflows/ansible-lint.yml)
 
 This role installs signal desktop.
 
