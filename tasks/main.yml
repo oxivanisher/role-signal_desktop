@@ -6,7 +6,7 @@
     uris: "https://updates.signal.org/desktop/apt"
     architectures: [amd64]
     components: [main]
-    suites: [xenial] # "{{ ansible_distribution_release|lower }}"
+    suites: [xenial] # "{{ ansible_distribution_release|lower }}" Signal only supports xenial ... but it seems to work everywhere :shrug:
     signed_by: https://updates.signal.org/desktop/apt/keys.asc
     state: present
     enabled: true
