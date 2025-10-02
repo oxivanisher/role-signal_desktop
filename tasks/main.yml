@@ -1,4 +1,12 @@
 ---
+
+- name: Ensure python3-debian is installed
+  ansible.builtin.package:
+    name: python3-debian
+    state: present
+  become: true
+  become_user: root
+
 - name: Add Signal repo using key from URL
   ansible.builtin.deb822_repository:
     name: signal-desktop
