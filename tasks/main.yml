@@ -1,31 +1,34 @@
 ---
+- name: Signal desktop only supports amd64 :(
+  when: ansible_userspace_architecture == "x86_64"
+  block:
 
-- name: Ensure python3-debian is installed
-  ansible.builtin.package:
-    name: python3-debian
-    state: present
-  become: true
-  become_user: root
+    - name: Ensure python3-debian is installed
+      ansible.builtin.package:
+        name: python3-debian
+        state: present
+      become: true
+      become_user: root
 
-- name: Add Signal repo using key from URL
-  ansible.builtin.deb822_repository:
-    name: signal-desktop
-    types: [deb]
-    uris: "https://updates.signal.org/desktop/apt"
-    architectures: [amd64]
-    components: [main]
-    suites: [xenial] # "{{ ansible_distribution_release|lower }}" Signal only supports xenial ... but it seems to work everywhere :shrug:
-    signed_by: https://updates.signal.org/desktop/apt/keys.asc
-    state: present
-    enabled: true
-  become: true
-  become_user: root
+    - name: Add Signal repo using key from URL
+      ansible.builtin.deb822_repository:
+        name: signal-desktop
+        types: [deb]
+        uris: "https://updates.signal.org/desktop/apt"
+        architectures: [amd64]
+        components: [main]
+        suites: [xenial] # "{{ ansible_distribution_release|lower }}" Signal only supports xenial ... but it seems to work everywhere :shrug:
+        signed_by: https://updates.signal.org/desktop/apt/keys.asc
+        state: present
+        enabled: true
+      become: true
+      become_user: root
 
-- name: Install Signal Desktop
-  ansible.builtin.apt:
-    name: signal-desktop
-    update_cache: true
-    state: present
-  ignore_errors: "{{ ansible_check_mode }}"
-  become: true
-  become_user: root
+    - name: Install Signal Desktop
+      ansible.builtin.apt:
+        name: signal-desktop
+        update_cache: true
+        state: present
+      ignore_errors: "{{ ansible_check_mode }}"
+      become: true
+      become_user: root
