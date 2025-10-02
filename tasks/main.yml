@@ -1,6 +1,6 @@
 ---
-- name: Signal desktop only supports amd64 :(
-  when: ansible_userspace_architecture == "x86_64"
+- name: Signal desktop only supports amd64
+  when: ansible_architecture == "x86_64"
   block:
 
     - name: Ensure python3-debian is installed
