@@ -1,6 +1,6 @@
 ---
 - name: Signal desktop only supports amd64
-  when: ansible_architecture == "x86_64"
+  when: ansible_facts.architecture == "x86_64"
   block:
 
     - name: Ensure python3-debian is installed
@@ -17,7 +17,7 @@
         uris: "https://updates.signal.org/desktop/apt"
         architectures: [amd64]
         components: [main]
-        suites: [xenial] # "{{ ansible_distribution_release|lower }}" Signal only supports xenial ... but it seems to work everywhere :shrug:
+        suites: [xenial] # "{{ ansible_facts.distribution_release|lower }}" Signal only supports xenial ... but it seems to work everywhere :shrug:
         signed_by: https://updates.signal.org/desktop/apt/keys.asc
         state: present
         enabled: true
