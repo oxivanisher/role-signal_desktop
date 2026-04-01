@@ -2,13 +2,11 @@
 - name: Signal desktop only supports amd64
   when: ansible_facts.architecture == "x86_64"
   block:
-
     - name: Ensure python3-debian is installed
       ansible.builtin.package:
         name: python3-debian
         state: present
       become: true
-      become_user: root
 
     - name: Add Signal repo using key from URL
       ansible.builtin.deb822_repository:
@@ -22,7 +20,6 @@
         state: present
         enabled: true
       become: true
-      become_user: root
 
     - name: Install Signal Desktop
       ansible.builtin.apt:
@@ -31,4 +28,3 @@
         state: present
       ignore_errors: "{{ ansible_check_mode }}"
       become: true
-      become_user: root
