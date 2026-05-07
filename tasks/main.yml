@@ -8,7 +8,14 @@
         state: present
       become: true
 
-    - name: Add Signal repo using key from URL
+    - name: Download Signal GPG key
+      ansible.builtin.get_url:
+        url: https://updates.signal.org/desktop/apt/keys.asc
+        dest: /etc/apt/keyrings/signal-desktop.asc
+        mode: '0644'
+      become: true
+
+    - name: Add Signal apt repository
       ansible.builtin.deb822_repository:
         name: signal-desktop
         types: [deb]
@@ -16,7 +23,7 @@
         architectures: [amd64]
         components: [main]
         suites: [xenial] # "{{ ansible_facts.distribution_release|lower }}" Signal only supports xenial ... but it seems to work everywhere :shrug:
-        signed_by: https://updates.signal.org/desktop/apt/keys.asc
+        signed_by: /etc/apt/keyrings/signal-desktop.asc
         state: present
         enabled: true
       become: true
